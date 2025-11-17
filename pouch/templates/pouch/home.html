@@ -1,0 +1,13 @@
+{% extends "pouch/Base.html" %} {% block cont %} {% for p in skill %}
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{p.author}}</a>
+      <small class="text-muted">{{p.posted_on}}</small>
+    </div>
+    <h2><a class="article-title" href="#">{{p.title}}</a></h2>
+    <p class="article-posted_on">{{p.posted_on}}</p>
+  </div>
+</article>
+
+{% endfor %} {% endblock cont %}
