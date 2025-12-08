@@ -27,20 +27,31 @@
   <body>
      <header class="site-header">
           <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-              <div class="container">
-                  <a class="navbar-brand mr-4" href="{url 'home page'}">Django</a>
-                  <button class="navbar-toggler" type="button" data-toggle="collapse"
+            <a class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar Toggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                   </button>
                     <div class="collapse navbar-collapse" id="navbarToggle">
                         <div class="navbar-nav mr-auto">
-                            <a class="nav-item nav-link" href="{url 'home page'}">Home</a>
-                            <a class="nav-item nav-link" href="{url 'about...'}">About</a>
-                        </div>
+                            <a class="nav-item nav-link" href="{% url 'home page' %}">Home</a>
+                            <a class="nav-item nav-link" href="{% url 'About...' %}">About</a>
+                        </div> <!--Navbar
+                        -->
                         <div class="navbar-nav">
-                          <a class="nav-item nav-link" href="#">Login</a>
-                          <a class="nav-item nav-link" href="#">Register</a>
-                        </div>
+                          {% if user.is_authenticated %}
+                          <a class="nav-item nav-link" href="{% url 'create-post' %}
+                          ">New post</a>
+                          <a class="nav-item nav-link" href="{% url 'profile' %}
+                          ">Profile</a>
+                          <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                          </form>
+                         {% else %}
+                          <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                          <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                          {% endif %}
+
+                        </div> 
                     </div>
                 </div>
             </nav>
@@ -60,11 +71,11 @@
               <div class="col-md-4">
                 <div class="content-section">
                       <h3>sidebar</h3>
-                      <P class="text-muted">Xen
+                      <P class="text-muted">
                       <ul class="list-group">
-                          <Li class="list-group-item list-group-item-light">last</Li>
-                          <li class="list-group-item list-group-item-light">Annual</li>
-                          <li class="list-group-item list-group-item-light">clab</li>
+                          <Li class="list-group-item list-group-item-light">Calendars</Li>
+                          <li class="list-group-item list-group-item-light">Lastest Posts</li>
+                          <li class="list-group-item list-group-item-light">Anonymous</li>
                           <li class="list-group-item list-group-item-light">etc</li>
                           
                       </ul>

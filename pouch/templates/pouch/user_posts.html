@@ -1,22 +1,26 @@
-{% extends "pouch/Base.html" %} {% block cont %} {% for p in skill %}
+{% extends "pouch/Base.html" %} {% block cont %}
+<h1 class="mb-3">
+  Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})
+</h1>
+{% for p in skill %}
 <article class="media content-section">
   <img
     class="rounded-circle article-img"
-    src="{{ p.author.profile.image.url }}"
+    src="{ p.author.profile.image.url }"
   />
   <div class="media-body">
     <div class="article-metadata">
-      <a class="mr-2" href="{% url 'user-posts' p.author.username %}"
+      <a class="mr-2" href="{ % url 'user-posts' p.author.username %}"
         >{{p.author}}</a
       >
-      <small class="text-muted">{{p.posted_on}}</small>
+      <small class="text-muted">{{p.content}}</small>
     </div>
     <h2>
       <a class="article-title" href="{% url 'post_detail' pk=p.id %}"
         >{{p.title}}</a
       >
     </h2>
-    <p class="article-content">{{p.content}}</p>
+    <p class="article-posted_on">{{p.posted_on}}</p>
   </div>
 </article>
 
@@ -27,20 +31,21 @@
   href="?page={{ page_obj.previous_page_number }}"
   >Previous Page</a
 >
-{% endif %} {% endif %} {% for num in page_obj.paginator.page_range %} {% if
-page_obj.number == num %}
+{% endif %} {% for num in page_obj.paginator.page_range %} {% if page_obj.number
+== num %}
 <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-{% if num == page_obj.number|add:'-3' and num == page_obj.number|add:'3' %}
-<a class="btn btn-outline-info mb-4" href="?page={{ num }}"></a>
-
-{% endif %} {% if page_obj.has_next %}
+{% else %} {% if num ==page_obj.number | add: '-3' or num == page_obj.number |
+add: '-3' %}
+<a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>{%
+endif %} {% endif %} {% endfor %} {% if page_obj.has_next %}
 <a
   class="btn btn-outline-info mb-4"
-  href="?page={{ page_obj.next_page_num_page_number }}"
+  href="?page={{ page_obj.next_page_number }}"
   >Next</a
 >
 <a
   class="btn btn-outline-info mb-4"
   href="?page={{ page_obj.paginator.num_pages }}"
   >Last</a
->{% endif %} {% endfor %} {% endblock cont %}
+>
+{% endif %} {% endif %} {% endblock cont %}
