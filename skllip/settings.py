@@ -9,6 +9,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path
 import os
 
@@ -85,6 +86,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+DATABASES["default"] = dj_database_url.parse("postgresql://minutes_django_render_user:ABN1OU1Zh5y00CjjwxoEXpjnh2PguMJt@dpg-d4sguvmmcj7s73c02c1g-a.virginia-postgres.render.com/minutes_django_render")
 
 
 # Password validation
@@ -128,8 +130,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL ='/media/'
 
 
-=======
->>>>>>> 5227e98a1831dfb5adef79312c9a5fdd4b989e72
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Default primary key field type
